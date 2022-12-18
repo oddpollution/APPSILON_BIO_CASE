@@ -36,6 +36,9 @@ species_poland <- read.csv("species_poland.csv", header = T)
 multimedia_poland <- read.csv("multimedia_poland.csv", header = T)
 
 species_poland$eventTime <- as.numeric(gsub(pattern = ":",".", species_poland$eventTime))
+multimedia_poland$eventTime <- as.numeric(gsub(pattern = ":",".", multimedia_poland$eventTime))
+
+multimedia_poland$eventDate <- as.Date.numeric(multimedia_poland$eventDate,origin = "1899-12-30")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -67,9 +70,9 @@ shinyServer(function(input, output) {
                                       {input$VERN},
                     locality %in% if(is.null(input$LOC)) 
                                     {locality} else 
-                                      {input$LOC},
+                                    {input$LOC},
                     if(is.na(input$DATES[1]) & is.na(input$DATES[2])) 
-                      {eventDate <= Sys.Date()} else
+                    {eventDate <= Sys.Date()} else
                     {if (is.na(input$DATES[1])) {eventDate <= input$DATES[2]} else
                     {if(is.na(input$DATES[2])) {eventDate >= input$DATES[1]} else
                     {eventDate >= input$DATES[1] & eventDate <= input$DATES[2]}}},
@@ -155,11 +158,19 @@ shinyServer(function(input, output) {
       {input$SCI},
       vernacularName %in% if(is.null(input$VERN)) 
       {vernacularName} else 
-      {input$VERN})
+      {input$VERN},
+      locality %in% if(is.null(input$LOC)) 
+      {locality} else 
+      {input$LOC},
+      if(is.na(input$DATES[1]) & is.na(input$DATES[2])) 
+      {eventDate <= Sys.Date()} else
+      {if (is.na(input$DATES[1])) {eventDate <= input$DATES[2]} else
+      {if(is.na(input$DATES[2])) {eventDate >= input$DATES[1]} else
+      {eventDate >= input$DATES[1] & eventDate <= input$DATES[2]}}})
     
-    validate(
-      need(!is.na(dataset1), "Sorry, no media avaible for the selected species")
-    )
+    # validate(
+    #   need(!is.na(dataset1), "Sorry, no media avaible for the selected species")
+    # )
     
     dataset1$acessURI <- paste('<img src=\'',dataset1$accessURI,' height=\'200\'</img>')
     
