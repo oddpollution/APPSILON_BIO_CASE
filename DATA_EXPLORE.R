@@ -58,7 +58,7 @@ species1$modified <- as.Date.numeric(species1$modified,origin = "1899-12-30")
 species1$longitudeDecimal <- as.double(species1$longitudeDecimal)
 species1$latitudeDecimal <- as.double(species1$latitudeDecimal)
 
-species1$eventTime[is.na(datatable1$eventTime)] <- 0
+species1$eventTime[is.na(species1$eventTime)] <- 0
 
 
 
@@ -73,12 +73,29 @@ datatable <- datatable[!duplicated(datatable[c('CoreId')]), ]
 datatable <- dplyr::rename(datatable,id = CoreId)
 
 datatable1_compl <- datatable1 %>% dplyr::select("id",
-                                         "scientificName",
-                                         "kingdom",
-                                         "family",
-                                         "vernacularName")
+                                                 "kingdom",
+                                                 "family",
+                                                 "scientificName",
+                                                 "vernacularName",
+                                                 "sex",
+                                                 "timesObserved",
+                                                 "individualCount",
+                                                 "lifeStage",
+                                                 "locality",
+                                                 "eventDate",
+                                                 "eventTime")
 
-species_images <- merge(datatable,datatable1_compl,by = "id", all.x = TRUE)
+species_images <- merge(datatable1_compl,datatable,by = "id", all.x = TRUE)
+
+species_images$eventTime[is.na(species_images$eventTime)] <- 0
+species_images$Identifier[is.na(species_images$Identifier)] <- "NOT AVAILABLE"
+species_images$type[is.na(species_images$type)] <- "NOT AVAILABLE"
+species_images$rightsHolder[is.na(species_images$rightsHolder)] <- "NOT AVAILABLE"
+species_images$creator[is.na(species_images$creator)] <- "NOT AVAILABLE"
+species_images$accessURI[is.na(species_images$accessURI)] <- "NOT AVAILABLE"
+species_images$format[is.na(species_images$format)] <- "NOT AVAILABLE"
+species_images$variantLiteral[is.na(species_images$variantLiteral)] <- "NOT AVAILABLE"
+species_images$license[is.na(species_images$license)] <- "NOT AVAILABLE"
 
 species_images <- species_images %>% dplyr::filter(!is.na(scientificName))
 
@@ -183,7 +200,6 @@ species_images$pic <- sprintf(species_images$accessURI)
 kable(species_images)
 
 View(species_images)
-
 
 ######################################### DISPOSAL #########################################
 
