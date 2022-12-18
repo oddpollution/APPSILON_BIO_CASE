@@ -18,15 +18,23 @@ Based on specific information, there can be seen where and when each observartio
 * vernacularName;
 * Locality;
 * Individual Count;
+* Times observed;
 * Date;
 * Time; 
 * Images.
 
 ### Navigation
-There can be checked about details of where, when and more specific info of each specie is distributed aroun the territory as also you can check on pictures of each creature, if available.
+There can be checked about details of where, when and more specific info of each specie is distributed aroun the territory as also you can check on pictures of each specimen, if available.
 
 #### Tabsets:
 * Geo Tracking;
-* Specifics
 
+
+Map overview pointing the location where the specimen was observed, followed by information mentioned above. 
+With the filters available on the sidebar of the application, you can check dates, time of the day, names (vernacular or scientific), kingdom and family. 
+
+* Specifics.
+
+
+Table providing information about the species and a picture.
 
