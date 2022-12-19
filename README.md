@@ -24,7 +24,7 @@ Based on specific information, there can be seen where and when each observartio
 * Images.
 
 ### Navigation
-There can be checked about details of where, when and more specific info of each specie is distributed aroun the territory as also you can check on pictures of each specimen, if available.
+Details of where, when and more specific info of each specie is distributed around the territory as also you can check on pictures of each specimen, if available can be checked in these tabs.
 
 #### Tabsets:
 * Geo Tracking;
